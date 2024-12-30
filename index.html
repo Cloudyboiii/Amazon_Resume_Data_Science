@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Science Resume - Amazon Internship</title>
+    <style>
+        :root {
+            --amazon-orange: #FF9900;
+            --amazon-dark: #232F3E;
+            --amazon-light: #EAEDED;
+            --amazon-yellow: #FFD814;
+            --amazon-yellow-hover: #F7CA00;
+            --amazon-orange-light: #FFA41C;
+            --amazon-link: #007185;
+            --amazon-success: #007600;
+            --amazon-price: #B12704;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background: var(--amazon-light);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes shine {
+            0% { background-position: -100px; }
+            40%, 100% { background-position: 140px; }
+        }
+
+        .breadcrumb {
+            max-width: 1300px;
+            margin: 0 auto 20px;
+            font-size: 14px;
+            color: var(--amazon-link);
+            cursor: pointer;
+            padding: 10px 0;
+        }
+
+        .breadcrumb:hover {
+            text-decoration: underline;
+            color: #C7511F;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(250px, 300px) minmax(500px, 1fr) minmax(250px, 300px);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        }
+
+        .tech-container {
+            margin-top: 15px;
+        }
+
+        .tech-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tech-item {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tech-item {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-item:hover {
+            border-color: var(--amazon-link);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 5px rgba(15, 17, 17, 0.15);
+        }
+
+        .tech-item::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.3) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(45deg);
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        .tech-item:hover::after {
+            opacity: 1;
+            animation: shine 1s ease-in-out;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .stars {
+            color: var(--amazon-orange-light);
+            margin-right: 8px;
+            letter-spacing: -1px;
+            position: relative;
+        }
+
+        .stars::after {
+            content: '★★★★★';
+            position: absolute;
+            left: 0;
+            color: var(--amazon-orange);
+            width: 0;
+            overflow: hidden;
+            transition: width 0.3s ease;
+        }
+
+        .stars:hover::after {
+            width: 100%;
+        }
+
+        .endorsements {
+            color: #007185;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .amazon-choice {
+            display: inline-block;
+            background: #232F3E;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            margin: 10px 0;
+        }
+
+        .cgpa {
+            color: #B12704;
+            font-size: 20px;
+            margin: 15px 0 5px;
+        }
+
+        .education {
+            color: #565959;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .experience-item {
+            margin-bottom: 16px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .experience-item {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-item:hover {
+            border-color: var(--amazon-link);
+            box-shadow: 0 2px 8px rgba(15, 17, 17, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 0;
+            background: var(--amazon-orange);
+            transition: height 0.3s ease;
+        }
+
+        .experience-item:hover::before {
+            height: 100%;
+        }
+
+        .experience-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #0F1111;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .experience-title::after {
+            content: '→';
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .experience-item:hover .experience-title::after {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .experience-duration {
+            color: #565959;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .experience-points {
+            list-style-type: none;
+            margin-left: 0;
+        }
+
+        .experience-points li {
+            position: relative;
+            padding-left: 15px;
+            margin-bottom: 4px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .experience-points li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #565959;
+        }
+
+        .award-badge {
+            background: linear-gradient(135deg, #FF9900, #FFA41C);
+            color: #111;
+            padding: 4px 8px;
+            border-radius: 2px;
+            font-size: 12px;
+            font-weight: 500;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .main-section {
+            margin-bottom: 24px;
+        }
+
+        .main-section h3 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            font-weight: 700;
+            color: #0F1111;
+        }
+
+        .right-column {
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-bottom: 10px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .btn i {
+            font-size: 16px;
+            font-style: normal;
+        }
+
+        .btn-primary {
+            background: var(--amazon-yellow);
+            border-color: var(--amazon-yellow-hover);
+            color: #0F1111;
+        }
+
+        .btn-primary:hover {
+            background: var(--amazon-yellow-hover);
+        }
+
+        .btn-secondary {
+            background: var(--amazon-orange-light);
+            border-color: #FF8F00;
+            color: #0F1111;
+        }
+
+        .btn-secondary:hover {
+            background: #FF8F00;
+        }
+
+        .social-btn-linkedin {
+            background: #0A66C2;
+            color: white;
+            border-color: #004182;
+        }
+
+        .social-btn-linkedin:hover {
+            background: #004182;
+        }
+
+        .social-btn-github {
+            background: #24292E;
+            color: white;
+            border-color: #1B1F23;
+        }
+
+        .social-btn-github:hover {
+            background: #1B1F23;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 12px 0;
+            color: #0F1111;
+            font-size: 14px;
+        }
+
+        .check-icon {
+            color: #007600;
+        }
+    </style>
+</head>
+<body>
+    <div class="breadcrumb">‹ Back to candidates</div>
+
+    <div class="container">
+        <!-- Left Column -->
+        <div class="card">
+            <h2 style="font-size: 18px; font-weight: 700;">Tech Stack</h2>
+            <div class="tech-container">
+                <div class="tech-grid">
+                    <div class="tech-item" data-level="Expert">Python</div>
+                    <div class="tech-item" data-level="Advanced">SQL</div>
+                    <div class="tech-item" data-level="Advanced">Machine Learning</div>
+                    <div class="tech-item" data-level="Intermediate">AWS</div>
+                    <div class="tech-item" data-level="Advanced">Data Mining</div>
+                    <div class="tech-item" data-level="Advanced">Big Data</div>
+                    <div class="tech-item" data-level="Advanced">ETL</div>
+                    <div class="tech-item" data-level="Expert">Statistical Analysis</div>
+                    <div class="tech-item" data-level="Advanced">TensorFlow</div>
+                    <div class="tech-item" data-level="Advanced">PyTorch</div>
+                    <div class="tech-item" data-level="Expert">Scikit-learn</div>
+                    <div class="tech-item" data-level="Advanced">Data Visualization</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 15px;">Skills Breakdown</h2>
+                
+                <div class="skill-category">
+                    <h4>Core Data Science</h4>
+                    <div class="tech-grid">
+                        <div class="tech-item" data-level="Expert">Reinforcement Learning</div>
+                        <div class="tech-item" data-level="Expert">Data Handling</div>
+                        <div class="tech-item" data-level="Advanced">Streamlit</div>
+                        <div class="tech-item" data-level="Expert">Machine Learning</div>
+                        <div class="tech-item" data-level="Advanced">Predictive Analytics</div>
+                        <div class="tech-item" data-level="Advanced">Statistical Modeling</div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h4>Development & Tools</h4>
+                    <div class="tech-grid">
+                        <div class="tech-item" data-level="Expert">Python</div>
+                        <div class="tech-item" data-level="Advanced">SQL</div>
+                        <div class="tech-item" data-level="Advanced">Git</div>
+                        <div class="tech-item" data-level="Intermediate">AWS</div>
+                        <div class="tech-item" data-level="Advanced">Jupyter</div>
+                        <div class="tech-item" data-level="Advanced">Docker</div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h4>Security & Best Practices</h4>
+                    <div class="tech-grid">
+                        <div class="tech-item" data-level="Intermediate">Cyber Security</div>
+                        <div class="tech-item" data-level="Advanced">Data Privacy</div>
+                        <div class="tech-item" data-level="Advanced">Code Quality</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Middle Column -->
+        <div class="card">
+            <h1 style="font-size: 24px; font-weight: 500; margin-bottom: 8px;">Badal Gupta - Data Science</h1>
+            <div style="font-size: 14px; color: #565959; line-height: 1.4;">
+                +1 (518) 699-2479 | badal.gupta0408@gmail.com 
+            </div>
+            
+            <div class="rating">
+                <span class="stars">★★★★★</span>
+                <span class="endorsements">Data Science Excellence</span>
+            </div>
+
+            <div class="main-section">
+                <h3>About Me</h3>
+                <p style="color: #333; line-height: 1.4; font-size: 14px;">
+                    Data Science graduate student with comprehensive expertise spanning machine learning, data analysis, and software development. 
+                    Published researcher with proven track record in developing ML models, statistical analysis, and data-driven solutions across 
+                    healthcare and business domains. Demonstrated success in end-to-end project implementation, from data processing to production 
+                    deployment. Seeking Summer 2025 internship opportunities to leverage strong technical foundation and research experience in 
+                    driving data-powered innovations.
+                </p>
+            </div>
+
+            <div class="amazon-choice">
+                Amazon's Choice for Data Science
+            </div>
+
+            <div class="cgpa">3.3/4 CGPA</div>
+            <div class="education">
+                MS Data Sciences @ SUNY Albany (Expected Dec 2026)
+            </div>
+
+            <div class="main-section">
+                <h3>Professional Experience</h3>
+                <div class="experience-item">
+                    <div class="experience-title">Machine Learning Research Intern</div>
+                    <div class="experience-duration">Indus University | June 2022 - February 2024</div>
+                    <ul class="experience-points">
+                        <li>Designed and implemented end-to-end data pipeline processing 100,000+ medical records</li>
+                        <li>Optimized database queries resulting in 45% reduction in processing time</li>
+                        <li>Published research on heart failure prediction achieving 92% accuracy</li>
+                        <li>Developed automated data quality monitoring systems</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-title">Data Analyst Intern</div>
+                    <div class="experience-duration">Towa Pharma Pvt. Ltd. | June 2023 - July 2023</div>
+                    <ul class="experience-points">
+                        <li>Engineered ML models for employee attrition prediction achieving 5% reduction in turnover</li>
+                        <li>Built data processing pipelines handling 50,000+ employee records</li>
+                        <li>Created automated reporting system reducing analysis time by 75%</li>
+                        <li>Identified key factors saving $200,000+ annually through retention strategies</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="main-section">
+                <h3>Key Projects</h3>
+                <div class="experience-item">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div class="experience-title">Spotify Song Popularity Predictor</div>
+                        <span class="award-badge">ML Pipeline</span>
+                    </div>
+                    <ul class="experience-points">
+                        <li>Engineered scalable ETL pipeline processing 100,000+ song records</li>
+                        <li>Achieved 89% prediction accuracy using ensemble learning models</li>
+                        <li>Reduced model inference time by 45% through optimization</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div class="experience-title">Healthcare Data Warehouse</div>
+                        <span class="award-badge">Big Data</span>
+                    </div>
+                    <ul class="experience-points">
+                        <li>Designed and implemented scalable data warehouse schema</li>
+                        <li>Created automated ETL processes for multi-source data</li>
+                        <li>Developed real-time monitoring and validation systems</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div class="experience-title">Story Generation System</div>
+                        <span class="award-badge">Deep Learning</span>
+                    </div>
+                    <ul class="experience-points">
+                        <li>Developed ML pipeline integrating BLIP and Falcon models</li>
+                        <li>Built full-stack application with custom API endpoints</li>
+                        <li>Implemented production-grade optimization</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div class="experience-title">Valorant Matchmaking Simulator</div>
+                        <span class="award-badge">System Design</span>
+                    </div>
+                    <ul class="experience-points">
+                        <li>Developed matchmaking algorithm processing 10,000+ player profiles with 95% accuracy</li>
+                        <li>Improved player satisfaction by 40% through balanced team composition</li>
+                        <li>Built scalable system handling 1000+ concurrent users across 5 game modes</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div class="experience-title">HR Analytics Platform</div>
+                        <span class="award-badge">Business Impact</span>
+                    </div>
+                    <ul class="experience-points">
+                        <li>Built end-to-end ML pipeline for employee attrition prediction</li>
+                        <li>Performed advanced feature engineering to identify key attrition indicators</li>
+                        <li>Developed interactive dashboards using Plotly for real-time HR analytics</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="main-section">
+                <h3>Publications</h3>
+                <div class="experience-item">
+                    <div class="experience-title">Heart Failure Prediction using ML Algorithms</div>
+                    <div class="experience-duration">Indian Journal of Natural Sciences | February 2024</div>
+                    <ul class="experience-points">
+                        <li>Published research achieving 92% prediction accuracy</li>
+                        <li>Featured in Web of Science Scopus indexed journal</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div class="experience-title">Machine Learning Techniques for Used Car Price Prediction</div>
+                        <span class="award-badge">Impact Factor: 7.17</span>
+                    </div>
+                    <div class="experience-duration">International Journal of Research and Analytical Reviews | October 2023</div>
+                    <ul class="experience-points">
+                        <li>Conducted comparative analysis of ML algorithms for price prediction</li>
+                        <li>Evaluated performance metrics across multiple modeling approaches</li>
+                        <li>Published in high-impact international journal</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="main-section">
+                <h3>Certifications & Professional Development</h3>
+                <div class="experience-item">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div class="experience-title">Technical Certifications</div>
+                        <span class="award-badge">Verified Skills</span>
+                    </div>
+                    <ul class="experience-points">
+                        <li>AWS Natural Language Processing Certification</li>
+                        <li>British Airways Data Science Job Simulation</li>
+                        <li>Introduction to Cyber Security</li>
+                        <li>Python 3 Ultimate Guide</li>
+                        <li>Data-Driven Decision Making Certification</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div class="experience-title">Research Conference</div>
+                        <span class="award-badge">Speaker</span>
+                    </div>
+                    <ul class="experience-points">
+                        <li>Presented ML research at Birla Vishvakarma Mahavidyalaya (BVM) conference</li>
+                        <li>Co-authored paper with Dhruval Patel on heart failure prediction</li>
+                        <li>Published in Web of Science indexed journal (IJONS)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="main-section">
+                <h3>Additional Skills</h3>
+                <div style="margin-bottom: 15px;">
+                    <div style="font-weight: 600; margin-bottom: 8px; color: #0F1111;">Languages</div>
+                    <div class="tech-grid">
+                        <div class="tech-item">English (Professional)</div>
+                        <div class="tech-item">Hindi (Native)</div>
+                        <div class="tech-item">Gujarati (Native)</div>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <div style="font-weight: 600; margin-bottom: 8px; color: #0F1111;">Soft Skills</div>
+                    <div class="tech-grid">
+                        <div class="tech-item">Project Leadership</div>
+                        <div class="tech-item">Team Collaboration</div>
+                        <div class="tech-item">Problem-Solving</div>
+                        <div class="tech-item">Critical Thinking</div>
+                        <div class="tech-item">Agile Methodologies</div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <div style="font-weight: 600; margin-bottom: 8px; color: #0F1111;">Development Tools</div>
+                    <div class="tech-grid">
+                        <div class="tech-item">VS Code</div>
+                        <div class="tech-item">PyCharm</div>
+                        <div class="tech-item">Jupyter Notebook</div>
+                        <div class="tech-item">Git</div>
+                        <div class="tech-item">Docker</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-section">
+                <h3>Personal Achievements</h3>
+                <div class="experience-item">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div class="experience-title">Academic Excellence</div>
+                        <span class="award-badge">Top Performance</span>
+                    </div>
+                    <ul class="experience-points">
+                        <li>Maintained 9.30/10 GPA throughout undergraduate studies</li>
+                        <li>Rank 3rd at 18th SOF National Science Olympiad</li>
+                        <li>Rank 2nd at 9th SOF International Mathematics Olympiad</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div class="experience-title">Competitive Achievements</div>
+                        <span class="award-badge">Gaming Excellence</span>
+                    </div>
+                    <ul class="experience-points">
+                        <li>Runner-up in University E-Sports Tournament (Rocket League)</li>
+                        <li>Runner-up in University E-Sports Tournament (Valorant)</li>
+                        <li>State level Chess Championship Participation</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div class="experience-title">Leadership & Community</div>
+                        <span class="award-badge">Impact</span>
+                    </div>
+                    <ul class="experience-points">
+                        <li>Led technical workshops on data science best practices</li>
+                        <li>Mentored junior students in ML and data analysis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="card right-column">
+            <a href="my_resume.pdf" download class="btn btn-primary">
+                Download Resume
+            </a>
+            <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                <a href="https://www.linkedin.com/in/badal-gupta04/" target="_blank" class="btn" style="background: #0A66C2; color: white; flex: 1;">
+                    <i style="margin-right: 5px;">in</i> LinkedIn
+                </a>
+                <a href="https://github.com/Cloudyboiii" target="_blank" class="btn" style="background: #24292E; color: white; flex: 1;">
+                    <i style="margin-right: 5px;">⌥</i> GitHub
+                </a>
+            </div>
+            <a href="mailto:badal.gupta0408@gmail.com" class="btn btn-secondary">
+                Contact Now
+            </a>
+            
+            <div class="check-item">
+                <span class="check-icon">✓</span>
+                Available for Summer 2025
+            </div>
+            <div class="check-item">
+                <span class="check-icon">✓</span>
+                Located in Albany, New York
+            </div>
+            <div class="check-item">
+                <span class="check-icon">✓</span>
+                Eligible to work in US
+            </div>
+            <div class="check-item">
+                <span class="check-icon">✓</span>
+                Current MS Student
+            </div>
+
+            <div style="margin-top: 20px;">
+                <h3 style="font-size: 16px; margin-bottom: 10px;">Key Achievements</h3>
+                <div class="experience-item">
+                    <ul class="experience-points">
+                        <li>Published in Web of Science Journal</li>
+                        <li>Processed 100K+ records in projects</li>
+                        <li>3rd Rank in National Science Olympiad</li>
+                        <li>9.30/10 Undergraduate GPA</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
